@@ -9,18 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class LogAspect {
 
-  // @Before("execution(*
-  // com.example.demo.login.controller.LoginController.getLogin(..))")
-  // public void StartLog(JoinPoint jp) {
-  // System.out.println("メソッド開始：" + jp.getSignature());
-  // }
-
-  // @After("execution(*
-  // com.example.demo.login.controller.LoginController.getLogin(..))")
-  // public void endLog(JoinPoint jp) {
-  // System.out.println("メソッド終了：" + jp.getSignature());
-  // }
-
   @Around("execution(* *..*.*Controller.*(..))")
   public Object startLog(ProceedingJoinPoint jp) throws Throwable {
     System.out.println("メソッド開始：" + jp.getSignature());
