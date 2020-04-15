@@ -10,15 +10,18 @@
 </head>
 
 <body class="text-center">
-  <h1>Login</h1>
-  <form action="/login" method="post">
+  <h2>ログイン画面</h2>
+  <form th:action="@{/login}" method="post">
+    <p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null" class="text-danger">
+      [[${session['SPRING_SECURITY_LAST_EXCEPTION'].message}]]
+    </p>
     <label>ユーザーID</label>
-    <input type="text"><br><br>
+    <input type="text" name="userId"><br><br>
 
     <label>パスワード</label>
-    <input type="password"><br><br>
+    <input type="password" name="password"><br><br>
 
-    <button type="submit" class="btn btn-primary">ログイン</button>
+    <button type="submit" class="btn btn-primary">ログイン</button><br><br>
   </form>
 
   <a th:href="@{'/signup'}">ユーザー新規登録はこちら</a>

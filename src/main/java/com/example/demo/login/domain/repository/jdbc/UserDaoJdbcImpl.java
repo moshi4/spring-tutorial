@@ -10,6 +10,7 @@ import com.example.demo.login.domain.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -17,6 +18,9 @@ public class UserDaoJdbcImpl implements UserDao {
 
   @Autowired
   JdbcTemplate jdbc;
+
+  @Autowired
+  PasswordEncoder passwordEncoder;
 
   @Override
   public User selectOne(String userId) throws DataAccessException {
@@ -50,10 +54,12 @@ public class UserDaoJdbcImpl implements UserDao {
   @Override
   public int insertOne(User user) throws DataAccessException {
 
+    String password = passwordEncoder.encode(user.getPassword());
+
     int rowNumber = jdbc.update(
         "insert into m_user(user_id, password, user_name, birthday, age, marriage, role) "
             + "values(?, ?, ?, ?, ?, ?, ?)",
-        user.getUserId(), user.getPassword(), user.getUserName(), user.getBirthday(), user.getAge(),
+        user.getUserId(), password, user.getUserName(), user.getBirthday(), user.getAge(),
         user.isMarriage(), user.getRole());
 
     return rowNumber;
@@ -85,9 +91,11 @@ public class UserDaoJdbcImpl implements UserDao {
   @Override
   public int updateOne(User user) throws DataAccessException {
 
+    String password = passwordEncoder.encode(user.getPassword());
+
     int rowNumber = jdbc.update(
         "update m_user set password = ?, user_name = ?, birthday = ? age = ?, marriage = ?, Where user_id = ? ",
-        user.getPassword(), user.getUserName(), user.getBirthday(), user.getAge(),
+        user.getPassword(), password, user.getBirthday(), user.getAge(),
         user.isMarriage(), user.getUserId());
 
     return rowNumber;

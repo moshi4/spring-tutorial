@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springscurity4">
 
 <head>
   <meta charset="UTF-8">
@@ -12,12 +13,12 @@
 
 <body>
   <!-- Header -->
-  <nav class="navbar navbar-inverse navbar-fixed-top bg-dark">
+  <nav class="navbar navbar-inverse fixed-top bg-dark">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a href="#" class="navbar-brand">SpringSample</a>
+        <a th:href="@{/home}" class="navbar-brand">SpringSample</a>
       </div>
-      <form th:action="@{/logout}" method="post">
+      <form method="post" th:action="@{/logout}">
         <button class="btn btn-link pull-right navbar-brand" type="submit">
           ログアウト
         </button>
@@ -28,9 +29,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-2 sidebar">
-        <ul class="nav nav-pills nav-stacked">
+        <ul class="nav nav-pills flex-column">
           <li role="presentation">
             <a th:href="@{/userList}">ユーザー管理</a>
+          </li>
+          <li role="presentation" sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/admin}">アドミン専用画面</a>
           </li>
         </ul>
       </div>
