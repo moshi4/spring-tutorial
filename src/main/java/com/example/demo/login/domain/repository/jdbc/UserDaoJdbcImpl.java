@@ -59,8 +59,8 @@ public class UserDaoJdbcImpl implements UserDao {
     int rowNumber = jdbc.update(
         "insert into m_user(user_id, password, user_name, birthday, age, marriage, role) "
             + "values(?, ?, ?, ?, ?, ?, ?)",
-        user.getUserId(), password, user.getUserName(), user.getBirthday(), user.getAge(),
-        user.isMarriage(), user.getRole());
+        user.getUserId(), password, user.getUserName(), user.getBirthday(), user.getAge(), user.isMarriage(),
+        user.getRole());
 
     return rowNumber;
   }
@@ -94,9 +94,8 @@ public class UserDaoJdbcImpl implements UserDao {
     String password = passwordEncoder.encode(user.getPassword());
 
     int rowNumber = jdbc.update(
-        "update m_user set password = ?, user_name = ?, birthday = ? age = ?, marriage = ?, Where user_id = ? ",
-        user.getPassword(), password, user.getBirthday(), user.getAge(),
-        user.isMarriage(), user.getUserId());
+        "update m_user set password = ?, user_name = ?, birthday = ?, age = ?, marriage = ? where user_id = ? ",
+        password, user.getUserName(), user.getBirthday(), user.getAge(), user.isMarriage(), user.getUserId());
 
     return rowNumber;
   }
