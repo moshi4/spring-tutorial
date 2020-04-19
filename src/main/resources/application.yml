@@ -26,6 +26,10 @@ spring:
   h2:
     console:
       enabled: true
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
     
 server:
   port: 8081

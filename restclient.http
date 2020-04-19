@@ -1,0 +1,33 @@
+@fqdn = http://localhost:8081
+
+GET {{fqdn}}/rest/get HTTP/1.1
+###
+GET {{fqdn}}/rest/get/aaa / HTTP/1.1
+### aaaaa
+POST {{fqdn}}/rest/insert HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": "aaa",
+  "password": "bbbc",
+  "userName": "ddddd",
+  "birthday": "1992-12-11",
+  "age": 27,
+  "marriage": false,
+  "role": "ROLE_GENERAL"
+}
+###
+PUT {{fqdn}}/rest/update HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": "aaa",
+  "password": "bbbc",
+  "userName": "update2",
+  "birthday": "1992-12-11",
+  "age": 27,
+  "marriage": false,
+  "role": "ROLE_GENERAL"
+}
+###
+DELETE {{fqdn}}/rest/delete/aaa HTTP/1.1
